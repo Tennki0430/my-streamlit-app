@@ -19,7 +19,12 @@ class ClaudeClient:
         Args:
             api_key (str): Anthropic Claude API キー
         """
-        self.client = anthropic.Anthropic(api_key=api_key)
+from anthropic import Anthropic, HUMAN_PROMPT, AI_PROMPT
+
+class ClaudeClient:
+    def __init__(self, api_key: str):
+        self.client = Anthropic()
+        self.client.api_key = api_key
         self.model = "claude-3-sonnet-20240229"  # 使用するモデル
     
     def generate_titles(self, main_keyword: str, related_keywords: List[str], target_audience: str) -> List[str]:
